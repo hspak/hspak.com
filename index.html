@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="Homepage of Hong Shick Pak">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'">
@@ -13,14 +14,17 @@
   <title>Hong Shick Pak</title>
   <link rel="canonical" href="https://hspak.com/">
   <style>
+    :root {
+      color-scheme: light dark;
+    }
     body {
       min-height: 100vh;
       margin: 0;
       display: grid;
       place-items: center;
       font-family: monospace;
-      color: #333;
-      background: #fff;
+      color: light-dark(#333, #ccc);
+      background: light-dark(#fff, #111);
     }
     h1 {
       font-family: serif;
@@ -33,11 +37,11 @@
       padding-left: 0.5rem;
     }
     a {
-      color: #369;
+      color: light-dark(#369, #6af);
       text-decoration: none;
     }
     a:hover {
-      color: #5b84ad;
+      color: light-dark(#5b84ad, #9cf);
     }
   </style>
 </head>
