@@ -15,7 +15,26 @@
   <link rel="canonical" href="https://hspak.com/">
   <style>
     :root {
+      --paper: #F3EEE6;
+      --ink: #1A1614;
+      --oxide: #C2410C;
+      --oxide-deep: #9A3412;
+      --sage: #3F4F46;
+      --brass: #B0892E;
+      --mist: #8A8178;
+      --line: light-dark(#DDD4C8, #2C2623);
+      --bg: light-dark(var(--paper), var(--ink));
+      --fg: light-dark(var(--ink), var(--paper));
+      --muted: light-dark(var(--sage), var(--mist));
+      --accent: var(--oxide);
       color-scheme: light dark;
+    }
+    /* Unchecked follows the OS; checked inverts it. */
+    @media (prefers-color-scheme: light) {
+      :root:has(#theme:checked) { color-scheme: dark; }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:has(#theme:checked) { color-scheme: light; }
     }
     body {
       min-height: 100vh;
@@ -23,13 +42,26 @@
       display: grid;
       place-items: center;
       font-family: monospace;
-      color: light-dark(#333, #ccc);
-      background: light-dark(#fff, #111);
+      color: var(--fg);
+      background: var(--bg);
+      transition: color 0.2s, background 0.2s;
     }
     h1 {
+      position: relative;
       font-family: serif;
       font-size: 1.75em;
       margin: 0 0 0.5em;
+    }
+    .name-korean {
+      position: absolute;
+      left: 0;
+      visibility: hidden;
+    }
+    h1:hover .name-english {
+      visibility: hidden;
+    }
+    h1:hover .name-korean {
+      visibility: visible;
     }
     nav {
       display: grid;
@@ -37,17 +69,61 @@
       padding-left: 0.5rem;
     }
     a {
-      color: light-dark(#369, #6af);
+      color: var(--accent);
       text-decoration: none;
     }
     a:hover {
-      color: light-dark(#5b84ad, #9cf);
+      color: light-dark(var(--oxide-deep), var(--brass));
+    }
+    #theme {
+      appearance: none;
+      pointer-events: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+    label[for="theme"] {
+      position: fixed;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.15s;
+    }
+    label[for="theme"]:hover {
+      color: var(--fg);
+    }
+    body:has(#theme:focus-visible) label[for="theme"] {
+      color: var(--fg);
+      outline: 1px solid var(--accent);
+      outline-offset: 2px;
+    }
+    label[for="theme"] [aria-hidden] {
+      font-size: 1.1rem;
+      line-height: 1;
+      font-variant-emoji: text;
+    }
+    label[for="theme"] span:last-child {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
     }
   </style>
 </head>
 <body>
   <main>
-    <h1 title="박홍식">Hong Shick Pak</h1>
+    <h1><span class="name-english">Hong Shick Pak</span><span class="name-korean" lang="ko">박홍식</span></h1>
     <nav>
       <a href="https://hspak.dev/">Blog</a>
       <a href="mailto:hong@hspak.com">Email</a>
@@ -56,5 +132,7 @@
       <a href="https://x.com/hspasta/">X</a>
     </nav>
   </main>
+  <input type="checkbox" id="theme">
+  <label for="theme" title="Toggle color scheme"><span aria-hidden="true">◐</span><span>Toggle color scheme</span></label>
 </body>
 </html>
