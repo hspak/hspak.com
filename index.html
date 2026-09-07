@@ -90,10 +90,13 @@
     }
     label[for="theme"] {
       position: fixed;
-      top: 0.5rem;
-      right: 0.5rem;
-      width: 2.25rem;
-      height: 2.25rem;
+      /* Match the docs toggle's 1.125rem base without resizing the page. */
+      font-size: 1.125rem;
+      font-family: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      top: 0.5em;
+      right: 0.5em;
+      width: 2.25em;
+      height: 2.25em;
       display: grid;
       place-items: center;
       border-radius: 50%;
@@ -111,7 +114,7 @@
       outline-offset: 2px;
     }
     label[for="theme"] [aria-hidden] {
-      font-size: 1.1rem;
+      font-size: 1.1em;
       line-height: 1;
       font-variant-emoji: text;
     }
